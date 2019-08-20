@@ -3,8 +3,11 @@ import RainDrops from "./animations/RainDrop";
 import Thunderstorms from "./animations/Thunderstorms";
 import Clouds from "./animations/Clouds";
 import Sunshine from "./animations/Sunshine";
+import StarryNight from "./animations/StarryNight";
+import Mist from "./animations/Mist";
 import SoundEffect from "./animations/SoundEffect";
 import { WeatherContext } from "../../context/CurrentInfoContext";
+import { checkDayNight } from "./commonFunc";
 
 const WeatherAnimation = () => {
   const asset = useContext(WeatherContext);
@@ -15,6 +18,7 @@ const WeatherAnimation = () => {
         //thunderstorm + rain
         return (
           <React.Fragment>
+            <SoundEffect />
             <Thunderstorms />
             <RainDrops itemCnt="250" angle="20" />
           </React.Fragment>
@@ -39,11 +43,12 @@ const WeatherAnimation = () => {
       }
       case 7: {
         //Mist
-        return <Sunshine />;
+        return <Mist />;
       }
       case 800: {
         //Clear : each day & night
-        return <Sunshine />;
+        if (checkDayNight()) return <Sunshine />;
+        else return <StarryNight />;
       }
       default: {
         //Clouds

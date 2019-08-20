@@ -7,8 +7,6 @@ const SoundEffect = () => {
   let refAudio = useRef(null);
   const assets = useContext(WeatherContext);
 
-  console.log(assets);
-
   useEffect(() => {
     if (!refAudio) return;
     refAudio.src = `/sounds/${assets.sound}`;

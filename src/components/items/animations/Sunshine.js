@@ -4,6 +4,7 @@ import { TimelineMax, TweenMax, Elastic, Power0 } from "gsap/all";
 import { randomInRange } from "../commonFunc";
 
 const Sunshine = () => {
+  // initialize reference
   let refSun = useRef(null);
   let refRing = useRef(null);
   let refRays = useRef([new Array(6).fill().map(() => React.createRef())]);
@@ -42,10 +43,10 @@ const Sunshine = () => {
 
     tlRay.staggerTo(refRays.current, 2, { opacity: 1 }, 1);
 
-    refParticles.current.map(particle => {
+    refParticles.current.forEach(particle => {
       const size = randomInRange(8, 2);
-      const top = randomInRange(0, 65);
-      const left = randomInRange(70, 95);
+      const top = randomInRange(65, 0);
+      const left = randomInRange(95, 70);
 
       TweenMax.set(particle, {
         height: size,
@@ -57,9 +58,8 @@ const Sunshine = () => {
 
     tlPar.staggerTo(
       refParticles.current,
-      2,
+      3,
       {
-        opacity: 0.5,
         transform: "scale(1.8)",
         opacity: 1,
         ease: Elastic.easeInOut
@@ -73,7 +73,8 @@ const Sunshine = () => {
     };
   }, []);
 
-  const makeSunRays = () => {
+  // maeke sun ray objects
+  const renderSunRays = () => {
     const raylength = 6;
     const arry = new Array(raylength).fill();
 
@@ -82,7 +83,8 @@ const Sunshine = () => {
     });
   };
 
-  const makeParticle = () => {
+  // maeke sun particle objects
+  const renderParticles = () => {
     const particleCnt = 10;
     const arry = new Array(particleCnt).fill();
 
@@ -93,11 +95,11 @@ const Sunshine = () => {
 
   return (
     <React.Fragment>
-      {makeParticle()}
+      {renderParticles()}
       <SUNBG>
         <SUN ref={el => (refSun = el)}>
           <SUNRING ref={el => (refRing = el)} />
-          {makeSunRays()}
+          {renderSunRays()}
         </SUN>
       </SUNBG>
     </React.Fragment>
