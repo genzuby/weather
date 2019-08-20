@@ -1,0 +1,65 @@
+{
+  "data": [
+    {
+      "id": 2,
+      "name": "Thunderstorm",
+      "icon": "fas fa-poo-storm",
+      "background": "thunder-day.jpg",
+      "backgroundnight": "thunder-night.jpg",
+      "sound": "thunder.mp3"
+    },
+    {
+      "id": 3,
+      "name": "Drizzle",
+      "icon": "fas fa-cloud-rain",
+      "background": "rain-day.jpg",
+      "backgroundnight": "rain-night.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Rain",
+      "icon": "fas fa-cloud-showers-heavy",
+      "background": "rain-day.jpg",
+      "backgroundnight": "rain-night.jpg",
+      "sound": "rain.mp3"
+    },
+    {
+      "id": 6,
+      "name": "Snow",
+      "icon": "far fa-snowflake",
+      "background": "snow-day.jpg",
+      "backgroundnight": "snow-night.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Mist",
+      "icon": "fas fa-smog",
+      "background": "mist-day.jpg",
+      "backgroundnight": "mist-night.jpg",
+      "sound": "rain.mp3"
+    },
+    {
+      "id": 8,
+      "name": "Clouds",
+      "icon": "fas fa-cloud",
+      "background": "cloudy-day.jpg",
+      "backgroundnight": "cloudy-night.jpg"
+    },
+    {
+      "id": 800,
+      "name": "Clear",
+      "icon": "fas fa-sun",
+      "iconnight": "fas fa-moon",
+      "background": "clear-day.jpg",
+      "backgroundnight": "clear-night.jpg"
+    },
+    {
+      "id": 801,
+      "name": "Clouds",
+      "icon": "fas fa-cloud-sun",
+      "iconnight": "fas fa-cloud-moon",
+      "background": "cloudy-day.jpg",
+      "backgroundnight": "cloudy-night.jpg"
+    }
+  ]
+}
