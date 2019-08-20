@@ -4,7 +4,7 @@ const randomInRange = (max, min) =>
 const checkDayNight = () => {
   const date = new Date();
   const hour = date.getHours();
-  return hour >= 7 && hour < 20 ? true : false;
+  return hour >= 7 && hour <= 19 ? true : false;
 };
 
 export { randomInRange, checkDayNight };

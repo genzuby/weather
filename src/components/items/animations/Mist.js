@@ -9,18 +9,18 @@ const Mist = () => {
 
   useEffect(() => {
     //for moving fog
-    TweenMax.set(refFog1, { left: -30 + "%" });
-    TweenMax.to(refFog1, 10, {
-      opacity: 1,
+    TweenMax.set(refFog1, { left: -10 + "%" });
+    TweenMax.to(refFog1, 25, {
+      opacity: 0.5,
       left: "+=10%",
       repeat: -1,
       yoyo: true
     });
     TweenMax.to(
       refFog2,
-      10,
+      20,
       {
-        opacity: 0.9,
+        opacity: 0.5,
         left: "-=10%",
         repeat: -1,
         yoyo: true
@@ -33,7 +33,7 @@ const Mist = () => {
     <React.Fragment>
       <FOG
         ref={el => (refFog1 = el)}
-        style={{ background: "url(/images/fog-1.png)" }}
+        style={{ background: "url(/images/fog-2.png)" }}
       />
       <FOG
         ref={el => (refFog2 = el)}
@@ -45,10 +45,12 @@ const Mist = () => {
 
 const FOG = styled.div`
   position: absolute;
+  background-size: contain;
+  background-repeat: repeat-x;
+  background-position: center;
   top: 0;
-  left: 0;
   height: 100vh;
-  width: 160%;
+  width: 110%;
   opacity: 0.1;
   filter: blur(1px);
 `;

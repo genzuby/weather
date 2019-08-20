@@ -15,7 +15,7 @@ const WeatherAnimation = () => {
   const setWeatherAni = () => {
     switch (asset.id) {
       case 2: {
-        //thunderstorm + rain
+        //thunderstorm + rain + sound
         return (
           <React.Fragment>
             <SoundEffect />
@@ -25,11 +25,16 @@ const WeatherAnimation = () => {
         );
       }
       case 3: {
-        //Drizzle
-        return <RainDrops itemCnt="100" />;
+        //Drizzle + sound
+        return (
+          <React.Fragment>
+            <SoundEffect />
+            <RainDrops itemCnt="100" angle="10" />
+          </React.Fragment>
+        );
       }
       case 5: {
-        //Rain
+        //Rain + sound
         return (
           <React.Fragment>
             <SoundEffect />
@@ -42,17 +47,22 @@ const WeatherAnimation = () => {
         return <RainDrops itemCnt="70" snow />;
       }
       case 7: {
-        //Mist
+        //Mist or fog
         return <Mist />;
       }
       case 800: {
         //Clear : each day & night
-        if (checkDayNight()) return <Sunshine />;
-        else return <StarryNight />;
+        if (checkDayNight()) {
+          return (
+            <React.Fragment>
+              <SoundEffect />
+              <Sunshine />
+            </React.Fragment>
+          );
+        } else return <StarryNight />;
       }
       default: {
         //Clouds
-        // return <Sunshine />;
         return <Clouds />;
       }
     }

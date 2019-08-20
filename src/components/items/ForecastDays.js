@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import { TimelineLite } from "gsap/all";
 import assetInfo from "../../json/weatherAsset.json";
+import { checkDayNight } from "./commonFunc";
 
 class ForeCastDays extends React.Component {
   constructor(props) {
@@ -45,6 +46,7 @@ class ForeCastDays extends React.Component {
   };
 
   getAvgTemp = () => {
+    // sum value each day : Beacuse the forcast data from API are applied by hourly based
     const arry = this.props.forecast5days;
     let objTemp = [];
 
@@ -57,10 +59,14 @@ class ForeCastDays extends React.Component {
         return previous > current.maxtemp ? previous : current.mintemp;
       }, 0);
 
+      // calc min temp , max temp each day
       objTemp[i] = {
         minavg: min,
         maxavg: max
       };
+
+      // sort by id beacuse the smaller number of id, the more unique it is.
+      // refer to ./json/weatherAsset.json file
       const sortVal = _.sortBy(value, ["wid"]);
 
       objTemp[i].weather = sortVal[0].weather;
@@ -70,12 +76,6 @@ class ForeCastDays extends React.Component {
     });
 
     return objTemp;
-  };
-
-  getCurrentTime = () => {
-    const date = new Date();
-    const hour = date.getHours();
-    return hour >= 7 && hour < 20 ? true : false;
   };
 
   getWeatherIcon = wid => {
@@ -91,7 +91,7 @@ class ForeCastDays extends React.Component {
       });
     }
 
-    const day = this.getCurrentTime();
+    const day = checkDayNight();
     const iconclass = day
       ? result.icon
       : result.iconnight === undefined
@@ -107,7 +107,7 @@ class ForeCastDays extends React.Component {
       return (
         <FORECAST
           key={i}
-          day={this.getCurrentTime()}
+          day={checkDayNight()}
           ref={el => (this.cards[i] = el)}
         >
           <i className={this.getWeatherIcon(data.wid)} />

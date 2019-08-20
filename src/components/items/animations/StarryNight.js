@@ -8,13 +8,13 @@ const StarryNight = () => {
   const colors = ["#E9D985", "#3CCFF66", "#D9F7FA", "#E8E9EB", "#F4F1BB"];
 
   //initial stars
-  const starCount = 150;
+  const starCount = 100;
   let refStars = useRef([
     new Array(starCount).fill().map(() => React.createRef())
   ]);
 
   //initial shooting stars
-  const shootingStarCount = 5;
+  const shootingStarCount = 3;
   let refShootingStars = useRef([
     new Array(shootingStarCount).fill().map(() => React.createRef())
   ]);
@@ -23,10 +23,10 @@ const StarryNight = () => {
   useEffect(() => {
     // Set animation initial value of stars
     refStars.current.forEach(star => {
-      const size = randomInRange(6, 2);
-      const top = randomInRange(40, 0);
-      const left = randomInRange(105, 0);
-      const opacity = randomInRange(6, 1);
+      const size = randomInRange(3, 2);
+      const top = randomInRange(50, 0);
+      const left = randomInRange(106, 0);
+      const opacity = randomInRange(0.7, 0.4);
 
       TweenMax.set(star, {
         height: size,
@@ -34,7 +34,7 @@ const StarryNight = () => {
         top: top + "%",
         left: left + "%",
         background: colors[randomInRange(4, 0)],
-        filter: "blur(2px)",
+        filter: "blur(2px) brightness(1)",
         opacity
       });
     });
@@ -47,15 +47,13 @@ const StarryNight = () => {
         top: -10,
         left: left + "%",
         rotation: -50,
-        backgroundImage: `linear-gradient(to right, ${
-          colors[randomInRange(4, 0)]
-        },transparent)`,
+        backgroundImage: "linear-gradient(to right,#fff,transparent)",
         filter: "blur(1px) brightness(2)"
       });
     });
 
     // to rotate sky
-    TweenMax.to(refStars.current, 60, { left: "-=5%", repeat: -1 });
+    TweenMax.to(refStars.current, 90, { left: "-=6%", repeat: -1 });
 
     // set animation in time lines for stars
     const tlStar = new TimelineMax({ repeat: -1, yoyo: true });
@@ -65,7 +63,7 @@ const StarryNight = () => {
     // stars animation
     tlStar.staggerTo(
       refStars.current,
-      2,
+      1,
       {
         transform: "scale(1.3)",
         opacity: 1,
@@ -77,8 +75,6 @@ const StarryNight = () => {
 
     // shooting stars animation
     // random gaps for animation
-    const gap = randomInRange(8, 1);
-
     tlShootingStar.staggerTo(
       refShootingStars.current,
       1,
@@ -89,7 +85,7 @@ const StarryNight = () => {
         filter: "blur(3px)",
         ease: Power1.easeIn
       },
-      gap
+      randomInRange(15, 8)
     );
 
     return () => {
@@ -130,6 +126,7 @@ const StarryNight = () => {
 const STAR = styled.div`
   position: absolute;
   border-radius: 50%;
+  opacity: 0.6;
 `;
 
 const SHOOTINGSTAR = styled.div`

@@ -13,7 +13,8 @@
       "name": "Drizzle",
       "icon": "fas fa-cloud-rain",
       "background": "rain-day.jpg",
-      "backgroundnight": "rain-night.jpg"
+      "backgroundnight": "rain-night.jpg",
+      "sound": "drizzle.mp3"
     },
     {
       "id": 5,
@@ -35,8 +36,7 @@
       "name": "Mist",
       "icon": "fas fa-smog",
       "background": "mist-day.jpg",
-      "backgroundnight": "mist-night.jpg",
-      "sound": "rain.mp3"
+      "backgroundnight": "mist-night.jpg"
     },
     {
       "id": 8,
@@ -51,7 +51,8 @@
       "icon": "fas fa-sun",
       "iconnight": "fas fa-moon",
       "background": "clear-day.jpg",
-      "backgroundnight": "clear-night.jpg"
+      "backgroundnight": "clear-night.jpg",
+      "sound": "clear-day.mp3"
     },
     {
       "id": 801,
