@@ -4,9 +4,10 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import { TimelineLite } from "gsap/all";
 import assetInfo from "../../json/weatherAsset.json";
-import { checkDayNight } from "./commonFunc";
+import { CityContext } from "../../context/SelectedCityContext";
 
 class ForeCastDays extends React.Component {
+  static contextType = CityContext;
   constructor(props) {
     super(props);
 
@@ -91,7 +92,7 @@ class ForeCastDays extends React.Component {
       });
     }
 
-    const day = checkDayNight();
+    const day = this.context.tzDay;
     const iconclass = day
       ? result.icon
       : result.iconnight === undefined
@@ -107,7 +108,7 @@ class ForeCastDays extends React.Component {
       return (
         <FORECAST
           key={i}
-          day={checkDayNight()}
+          day={this.context.tzDay}
           ref={el => (this.cards[i] = el)}
         >
           <i className={this.getWeatherIcon(data.wid)} />

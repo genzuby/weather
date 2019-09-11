@@ -7,33 +7,12 @@ const BackInfo = () => {
   let bgRef = useRef(null);
   const assets = useContext(WeatherContext);
 
-  const onMouseMoveHandler = e => {
-    const xPos = e.clientX / window.innerWidth - 0.1;
-    const yPos = e.clientY / window.innerHeight - 0.1;
-
-    TweenMax.to(bgRef, 0.8, {
-      ease: Power3.easeOut,
-      rotationX: 4 * xPos,
-      rotationY: 4 * yPos,
-      transformOrigin: "center",
-      transformPerspective: 1000
-    });
-  };
-
   useEffect(() => {
     TweenMax.to(bgRef, 1, {
       opacity: 1,
       ease: Power3.easeOut
     });
   }, []);
-
-  // useEffect(() => {
-  //   window.addEventListener("mousemove", onMouseMoveHandler);
-
-  //   return () => {
-  //     document.removeEventListener("mousemove", onMouseMoveHandler);
-  //   };
-  // }, []);
 
   const backImg = assets.background;
   return <BACKGROUND ref={el => (bgRef = el)} imgUrl={`/images/${backImg}`} />;

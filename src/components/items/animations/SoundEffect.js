@@ -13,20 +13,19 @@ const SoundEffect = () => {
     refAudio.volume = 0.2;
     refAudio.loop = true;
     refAudio.load();
-    refAudio.play();
 
-    return () => {
-      refAudio.pause();
-      refAudio.removeAttribute("src");
-      refAudio.load();
+    refAudio.oncanplaythrough = () => {
+      // refAudio.play();
+      // when the browser estimates it can play through the specified media without having to stop for buffering.
+      console.log("oncanplaythrough");
     };
+    refAudio.play();
   }, [assets.sound]);
 
   const onChangeRadio = checkValue => {
     if (!refAudio) return;
     setChecked(checkValue);
     checkValue === "PLAY" ? refAudio.play() : refAudio.pause();
-    console.log(checkValue);
   };
 
   return (

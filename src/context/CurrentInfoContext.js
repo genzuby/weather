@@ -1,5 +1,4 @@
 import React from "react";
-import { checkDayNight } from "../components/items/commonFunc";
 import assetInfo from "../json/weatherAsset.json";
 
 export const WeatherContext = React.createContext();
@@ -19,11 +18,16 @@ export const CurrentWeatherStore = props => {
       });
     }
 
-    const day = checkDayNight();
+    const day = props.day;
+    const timezone = props.timezone;
+    const city = props.city;
 
     return {
       id: getVal.id,
       name: getVal.name,
+      day: day,
+      tz: timezone,
+      city: city,
       icon: day ? getVal.icon : getVal.iconnight,
       background: day ? getVal.background : getVal.backgroundnight,
       sound: getVal.sound

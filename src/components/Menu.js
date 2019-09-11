@@ -1,7 +1,140 @@
-import React from "react";
+import React, { useState, useRef, useContext } from "react";
+import TweenMax from "gsap";
+import styled from "styled-components";
+import SearchInput from "./SearchInput";
+import { CityContext } from "../context/SelectedCityContext";
 
 const Menu = () => {
-  return <div>Menu</div>;
+  const [displayMenu, setDisplayMenu] = useState(false);
+  const [displaySearch, setDisplaySearch] = useState(false);
+  const contextInfo = useContext(CityContext);
+
+  let searchRef = useRef(null);
+  let currentRef = useRef(null);
+  let inputRef = useRef(null);
+
+  const toggleMenu = () => {
+    const move1 = displayMenu ? 48 : 57;
+    const move2 = displayMenu ? 48 : 97;
+
+    displayMenu ? setDisplayMenu(false) : setDisplayMenu(true);
+
+    TweenMax.to(searchRef, 0.3, {
+      left: move2,
+      top: move1
+    });
+    TweenMax.to(currentRef, 0.3, {
+      delay: 0.2,
+      left: move1,
+      top: move2
+    });
+  };
+
+  const showSearchInput = () => {
+    const inputWidth = displaySearch ? 0 : 360;
+
+    displaySearch ? setDisplaySearch(false) : setDisplaySearch(true);
+    TweenMax.to(inputRef, 0.3, {
+      width: inputWidth,
+      opacity: 1
+    });
+    TweenMax.to(searchRef, 0.3, {
+      left: `+=${displaySearch ? -310 : 310}`
+    });
+  };
+
+  const renderCurrentLocationWeather = () => {
+    contextInfo.onCityChange();
+    setDisplaySearch(false);
+    TweenMax.to(inputRef, 0.3, {
+      width: 0
+    });
+    TweenMax.to(searchRef, 0.3, {
+      left: "-=310"
+    });
+  };
+
+  return (
+    <MENU>
+      <SEARCH ref={el => (inputRef = el)}>
+        {displaySearch ? <SearchInput></SearchInput> : ""}
+      </SEARCH>
+      <MENUBG
+        ref={el => (searchRef = el)}
+        onClick={showSearchInput}
+        main={displayMenu ? "first" : "back"}
+        style={{ background: "#7261A3" }}
+        title={displaySearch ? "Close Search Input" : "Open Search"}
+      >
+        <MENUICON
+          src={
+            displaySearch
+              ? "/images/icons/times-solid.svg"
+              : "/images/icons/search-solid.svg"
+          }
+          alt="Search"
+        />
+      </MENUBG>
+      <MENUBG
+        ref={el => (currentRef = el)}
+        style={{ background: "#75DDDD" }}
+        main={displayMenu ? "second" : "back"}
+        onClick={renderCurrentLocationWeather}
+        title="Weather of your Location"
+      >
+        <MENUICON
+          src="/images/icons/location-arrow-solid.svg"
+          alt="Go to Current Location"
+        />
+      </MENUBG>
+      <MENUBG
+        main={displayMenu ? "sub" : "main"}
+        style={{ background: "#ED4D6E" }}
+        onClick={toggleMenu}
+        title={displayMenu ? "Close Menu" : "Open Menu"}
+      >
+        <MENUICON src="/images/icons/times-solid.svg" alt="menu" />
+      </MENUBG>
+    </MENU>
+  );
 };
 
+const MENU = styled.div`
+  position: absolute;
+  z-index: 9;
+  top: -2.4em;
+  left: -2.4em;
+`;
+
+const SEARCH = styled.div`
+  position: absolute;
+  top: 1.7em;
+  left: 4.5em;
+  width: 0;
+  opacity: 0;
+`;
+
+const MENUBG = styled.div`
+  position: absolute;
+  top: 3em;
+  left: 3em;
+  width: 2.7em;
+  height: 2.7em;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
+  transform: ${props => {
+    if (props.main === "main") return `rotate(45deg)`;
+    else if (props.main === "sub") return `rotate(180deg)`;
+  }};
+  transition: transform 0.3s ease-in-out;
+`;
+
+const MENUICON = styled.img`
+  height: 1.2em;
+  width: 1.2em;
+  cursor: pointer;
+`;
 export default Menu;

@@ -12,12 +12,48 @@ import ForecastDays from "./items/ForecastDays";
 import WeatherAnimation from "./items/WeatherAnimation";
 // json asset data context based on current weather
 import { CurrentWeatherStore } from "../context/CurrentInfoContext";
+// selected city information
+import { CityContext } from "../context/SelectedCityContext";
 
 class Home extends React.Component {
+  static contextType = CityContext;
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      lat: null,
+      lon: null,
+      day: null,
+      tz: null,
+      cuty: null
+    };
+
+    this.currentLocation();
+  }
+
   componentDidMount() {
     // fetch data every 5 mins
     this.fetchWetherData();
+
     this.intervalID = setInterval(this.fetchWetherData.bind(this), 50000);
+  }
+
+  componentDidUpdate(preProps, preState) {
+    //for context value change
+    if (
+      preState.lat !== this.context.lat ||
+      preState.lon !== this.context.lon
+    ) {
+      this.setState({
+        lat: this.context.lat,
+        lon: this.context.lon,
+        day: this.context.tzDay,
+        tz: this.context.timezone,
+        city: this.context.city
+      });
+      this.fetchWetherData();
+    }
   }
 
   componentWillUnmount() {
@@ -25,13 +61,36 @@ class Home extends React.Component {
     clearInterval(this.intervalID);
   }
 
-  fetchWetherData = () => {
-    //fetch data based on current geo location
-    navigator.geolocation.getCurrentPosition(async position => {
-      const { latitude, longitude } = position.coords;
-      const param = `lat=${latitude}&lon=${longitude}`;
+  fetchWetherData = async () => {
+    //fetch data
+    if (this.state.lat === null || this.state.lon === null) {
+      navigator.geolocation.getCurrentPosition(async position => {
+        const { latitude, longitude } = position.coords;
+        let param = `lat=${latitude}&lon=${longitude}`;
+        await this.props.getCurrentWeather(param);
+        await this.props.getForecastWeather(param);
+      });
+    } else {
+      let param = `lat=${this.state.lat}&lon=${this.state.lon}`;
       await this.props.getCurrentWeather(param);
       await this.props.getForecastWeather(param);
+    }
+
+    // let param = `lat=${this.state.lat}&lon=${this.state.lon}`;
+    // await this.props.getCurrentWeather(param);
+    // await this.props.getForecastWeather(param);
+  };
+
+  currentLocation = () => {
+    // default location value  : current position
+    navigator.geolocation.getCurrentPosition(position => {
+      const { latitude, longitude } = position.coords;
+
+      this.setState({
+        lat: latitude,
+        lon: longitude,
+        day: this.context.tzDay
+      });
     });
   };
 
@@ -41,6 +100,9 @@ class Home extends React.Component {
     return (
       <CurrentWeatherStore
         currentCode={this.props.currentWeather.weather[0].id}
+        day={this.state.day}
+        timezone={this.state.tz}
+        city={this.state.city}
       >
         <BackInfo />
         <MAININFO>

@@ -20,7 +20,7 @@ class RainDrops extends React.Component {
       const rotate = this.props.snow ? randomInRange(200, 90) : 0;
       const blurVal = this.props.snow
         ? randomInRange(3, 1)
-        : randomInRange(2, 0);
+        : randomInRange(2, 1);
       const path = () => {
         const min = -150,
           max = 150;
@@ -58,7 +58,7 @@ class RainDrops extends React.Component {
     const rains = arry.map((s, i) => {
       const height = this.props.snow
         ? randomInRange(15, 7)
-        : randomInRange(22, 12);
+        : randomInRange(18, 12);
 
       const alpha = this.props.snow
         ? randomInRange(0.9, 0.4)

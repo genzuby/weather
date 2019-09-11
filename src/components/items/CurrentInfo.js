@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { TweenMax, Power3 } from "gsap";
 import { WeatherContext } from "../../context/CurrentInfoContext";
+import { getCurrentTime } from "./commonFunc.js";
 
 class CurrentInfo extends React.Component {
   static contextType = WeatherContext;
@@ -22,8 +23,9 @@ class CurrentInfo extends React.Component {
       opacity: 1,
       ease: Power3.easeOut
     });
+    // time change every one sec.
     setInterval(() => {
-      this.setState({ currenttime: this.getCurrentTime() });
+      this.setState({ currenttime: getCurrentTime(this.context.tz) });
     }, 1000);
 
     return () => {
@@ -31,21 +33,14 @@ class CurrentInfo extends React.Component {
     };
   }
 
-  getCurrentTime = () => {
-    const date = new Date();
-    const localDate = date.toLocaleString();
-    return localDate;
-  };
-
   render() {
     const mainInfo = this.props.currentWeather.weather[0];
     const detailInfo = this.props.currentWeather;
 
     return (
       <CURRENTINFO ref={el => (this.myElement = el)}>
-        <h4>
-          {detailInfo.name} | {this.state.currenttime}
-        </h4>
+        <h3>{this.context.city ? this.context.city : detailInfo.name}</h3>
+        <h4>{this.state.currenttime}</h4>
         <h1>{mainInfo.main}</h1>
         <h3>{mainInfo.description}</h3>
         <i className={this.context.icon} />
@@ -60,6 +55,7 @@ const mapStateToProps = state => {
 };
 
 const CURRENTINFO = styled.div`
+  margin-bottom: 5%;
   opacity: 0;
   h1,
   h2,
