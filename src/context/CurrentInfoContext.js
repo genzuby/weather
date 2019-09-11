@@ -28,7 +28,11 @@ export const CurrentWeatherStore = props => {
       day: day,
       tz: timezone,
       city: city,
-      icon: day ? getVal.icon : getVal.iconnight,
+      icon: day
+        ? getVal.icon
+        : getVal.iconnight
+        ? getVal.iconnight
+        : getVal.icon,
       background: day ? getVal.background : getVal.backgroundnight,
       sound: getVal.sound
     };

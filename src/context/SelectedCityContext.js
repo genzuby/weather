@@ -36,7 +36,7 @@ export class CityContextStore extends React.Component {
     if (cityInfo === undefined) {
       // weather of current location
       this.currentLocation();
-      this.setState({ timezone: null, city: null, tzDay: checkDayNight() });
+      this.setState({ timezone: null, city: null });
       return;
     }
     const { lat, lon, timezone, city } = cityInfo;
