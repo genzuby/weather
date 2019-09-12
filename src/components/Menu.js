@@ -15,7 +15,11 @@ const Menu = () => {
   let currentBgRef = useRef(null);
   let inputRef = useRef(null);
 
-  const toggleMenu = () => {
+  const toggleMenu = e => {
+    // double click prevent
+    if (e.detail === 2) {
+      return;
+    }
     const move1 = displayMenu ? 48 : 57;
     const move2 = displayMenu ? 48 : 97;
     const delay = displayMenu ? [0.4, 0.3, 0.1, 0] : [0, 0.1, 0.3, 0.4];
@@ -124,6 +128,7 @@ const Menu = () => {
         main={displayMenu ? "sub" : "main"}
         style={{ background: "#ED4D6E" }}
         onClick={toggleMenu}
+        // onDoubleClick={toggleMenu}
         title={displayMenu ? "Close Menu" : "Open Menu"}
       >
         <MENUICON src="/images/icons/times-solid.svg" alt="menu" />
