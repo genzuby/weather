@@ -31,6 +31,7 @@ const SoundEffect = () => {
 
   const onChangeRadio = checkValue => {
     if (!refAudio) return;
+    
     setChecked(checkValue);
     checkValue === "PLAY" ? refAudio.play() : refAudio.pause();
   };
