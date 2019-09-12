@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 const sizes = {
-  pad: 990,
+  pad: 840,
   mobile: 450
 };
 // generate media query function

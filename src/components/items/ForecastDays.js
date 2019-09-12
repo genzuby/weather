@@ -5,6 +5,7 @@ import _ from "lodash";
 import { TimelineLite } from "gsap/all";
 import assetInfo from "../../json/weatherAsset.json";
 import { CityContext } from "../../context/SelectedCityContext";
+import media from "../style/media";
 
 class ForeCastDays extends React.Component {
   static contextType = CityContext;
@@ -113,11 +114,13 @@ class ForeCastDays extends React.Component {
           ref={el => (this.cards[i] = el)}
         >
           <i className={this.getWeatherIcon(data.wid)} />
-          <p>{this.getFutureDay(data.dt_txt)}</p>
-          <p>{data.weather}</p>
-          <p className="temp-val">
-            {data.minavg}°C / {data.maxavg}°C
-          </p>
+          <p className="for__date">{this.getFutureDay(data.dt_txt)}</p>
+          <div className="detail">
+            <p>{data.weather}</p>
+            <p className="temp-val">
+              {data.minavg}°C / {data.maxavg}°C
+            </p>
+          </div>
         </FORECAST>
       );
     });
@@ -140,6 +143,10 @@ const FORECASTLIST = styled.div`
   justify-content: center;
   align-items: center;
   margin: 3em auto 0;
+  flex-direction: row;
+  ${media.pad`
+    flex-direction: column;
+  `};
 `;
 
 const FORECAST = styled.div`
@@ -159,22 +166,41 @@ const FORECAST = styled.div`
   height: 12em;
   text-shadow: none;
 
+  ${media.pad`
+    flex-direction : row;
+    width: 14em;
+    height: 3.6em;
+    margin: 2px;
+  `};
+
   * {
     margin: 0;
     padding: 0;
+    ${media.pad`
+      padding: .25em;
+    `}
   }
 
   i {
     font-size: 2.5rem;
     padding-bottom: 0.5em;
+    ${media.pad`
+      font-size: 1.5rem;
+    `}
   }
 
   p {
     padding: 0.25em;
+    ${media.pad`
+      font-size: .8rem;
+    `}
   }
 
   .temp-val {
     font-size: 82%;
+    ${media.pad`
+      font-size: 70%;
+    `}
   }
 `;
 

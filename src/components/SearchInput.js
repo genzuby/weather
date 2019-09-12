@@ -115,7 +115,7 @@ const SEARCHDIV = styled.div`
 const INPUTFIELD = styled.input`
   width: 100%;
   padding: 0.5em;
-  font-size: 1rem;
+  font-size: calc(0.8rem+0.2vw);
   border: 2px solid #ccc;
   border-radius: 3px;
   outline: none;
@@ -128,7 +128,7 @@ const INPUTFIELD = styled.input`
 const CITYLIST = styled.ul`
   background: rgba(0, 0, 0, 0.8);
   position: absolute;
-  top: 1.62em;
+  top: 1.1em;
   width: 100%;
   padding: 0;
   max-height: 55vh;
@@ -136,11 +136,11 @@ const CITYLIST = styled.ul`
 
   li {
     padding: 0.8em 2em;
-    font-size: 0.9rem;
     border: 1px solid #000;
     color: #969696;
     cursor: pointer;
     transition: all 0.15s ease-out;
+    font-size: 80%;
 
     &:hover,
     &:focus {

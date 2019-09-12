@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { TweenMax, Power3 } from "gsap";
 import { WeatherContext } from "../../context/CurrentInfoContext";
 import { getCurrentTime } from "./commonFunc.js";
+import media from "../style/media";
 
 class CurrentInfo extends React.Component {
   static contextType = WeatherContext;
@@ -57,25 +58,34 @@ const mapStateToProps = state => {
 const CURRENTINFO = styled.div`
   margin-bottom: 5%;
   opacity: 0;
+
   h1,
   h2,
-  h3 {
+  h3,
+  h4 {
     margin: 0.5rem auto;
+
+    ${media.pad`
+      margin: 0.1rem auto;
+    `}
   }
   h1 {
-    font-size: 3.8rem;
+    font-size: calc(1.8rem + 2vw);
   }
 
   h2 {
-    font-size: 2rem;
+    font-size: calc(0.8rem + 1vw);
   }
 
   i {
     margin: 0.5em auto;
-    font-size: 2.5rem;
+    font-size: calc(1.5rem + 1vw);
   }
   h3 {
-    font-size: 1.5rem;
+    font-size: calc(0.8rem + 0.7vw);
+  }
+  h4 {
+    font-size: calc(0.7rem + 0.5vw);
   }
 `;
 
