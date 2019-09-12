@@ -1,5 +1,23 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Weather forecast App with animations
+
+## Libraries
+react<br>
+react-router-dom<br>
+redux<br>
+redux-thunk<br>
+es6<br>
+axios<br>
+gsap<br>
+lodash<br>
+sass(scss)<br>
+styled components<br>
+
+## Data from
+Open Weather API<br>
+City Geo-Location Lookup API<br>
+
 ## Available Scripts
 
 In the project directory, you can run:
