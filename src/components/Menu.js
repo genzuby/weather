@@ -17,7 +17,8 @@ const Menu = () => {
 
   const toggleMenu = e => {
     // double click prevent
-    if (e.detail === 2) {
+    console.log(e.detail);
+    if (e.detail >= 2) {
       return;
     }
     const move1 = displayMenu ? 48 : 57;
