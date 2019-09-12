@@ -13,13 +13,20 @@ const SoundEffect = () => {
     refAudio.volume = 0.2;
     refAudio.loop = true;
     refAudio.load();
-    refAudio.play();
 
-    // refAudio.oncanplaythrough = () => {
-    //   refAudio.play();
-    //   // when the browser estimates it can play through the specified media without having to stop for buffering.
-    //   // console.log("oncanplaythrough");
-    // };
+    var playPromise = refAudio.play();
+    // when the browser estimates it can play through the specified media without having to stop for buffering.
+    if (playPromise !== undefined) {
+      playPromise
+        .then(_ => {
+          // Automatic playback started!
+          // console.log("audio played auto");
+        })
+        .catch(error => {
+          // Auto-play was prevented
+          console.log("playback prevented");
+        });
+    }
   }, [assets.sound]);
 
   const onChangeRadio = checkValue => {

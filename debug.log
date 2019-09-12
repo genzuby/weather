@@ -111,3 +111,4 @@
 [0808/234512.499:ERROR:crash_report_database_win.cc(428)] unexpected header
 [0809/123112.134:ERROR:process_info.cc(359)] UncheckedAllocate
 [0814/104951.995:ERROR:process_info.cc(359)] UncheckedAllocate
+[0912/200158.863:ERROR:file_io.cc(134)] WriteFile: 파이프가 닫히는 중입니다. (0xE8)

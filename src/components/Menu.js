@@ -16,8 +16,7 @@ const Menu = () => {
   let inputRef = useRef(null);
 
   const toggleMenu = e => {
-    // double click prevent
-    console.log(e.detail);
+    // multiple click prevent
     if (e.detail >= 2) {
       return;
     }
