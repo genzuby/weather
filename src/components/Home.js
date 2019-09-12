@@ -14,6 +14,7 @@ import WeatherAnimation from "./items/WeatherAnimation";
 import { CurrentWeatherStore } from "../context/CurrentInfoContext";
 // selected city information
 import { CityContext } from "../context/SelectedCityContext";
+import { checkDayNight } from "./items/commonFunc";
 
 class Home extends React.Component {
   static contextType = CityContext;
@@ -26,7 +27,7 @@ class Home extends React.Component {
       lon: null,
       day: null,
       tz: null,
-      cuty: null
+      city: null
     };
 
     this.currentLocation();
@@ -35,14 +36,13 @@ class Home extends React.Component {
   componentDidMount() {
     // fetch data every 5 mins
     this.fetchWetherData();
-
     this.intervalID = setInterval(this.fetchWetherData.bind(this), 50000);
   }
 
   componentDidUpdate(preProps, preState) {
     //for context value change
     if (
-      preState.lat !== this.context.lat ||
+      preState.lat !== this.context.lat &&
       preState.lon !== this.context.lon
     ) {
       this.setState({
@@ -75,10 +75,6 @@ class Home extends React.Component {
       await this.props.getCurrentWeather(param);
       await this.props.getForecastWeather(param);
     }
-
-    // let param = `lat=${this.state.lat}&lon=${this.state.lon}`;
-    // await this.props.getCurrentWeather(param);
-    // await this.props.getForecastWeather(param);
   };
 
   currentLocation = () => {
@@ -89,7 +85,7 @@ class Home extends React.Component {
       this.setState({
         lat: latitude,
         lon: longitude,
-        day: this.context.tzDay
+        day: checkDayNight() // this.context.tzDay
       });
     });
   };

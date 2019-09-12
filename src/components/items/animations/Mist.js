@@ -9,18 +9,19 @@ const Mist = () => {
 
   useEffect(() => {
     //for moving fog
-    TweenMax.set(refFog1, { left: -10 + "%" });
-    TweenMax.to(refFog1, 15, {
-      opacity: 0.5,
-      left: "+=10%",
+    TweenMax.set(refFog1, { left: -30 + "%" });
+
+    TweenMax.to(refFog1, 10, {
+      opacity: 0.4,
+      left: "+=30%",
       repeat: -1,
       yoyo: true
     });
     TweenMax.to(
       refFog2,
-      15,
+      10,
       {
-        opacity: 0.5,
+        opacity: 0.7,
         left: "-=10%",
         repeat: -1,
         yoyo: true

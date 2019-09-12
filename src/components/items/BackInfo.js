@@ -1,11 +1,15 @@
-import React, { useRef, useContext, useEffect } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import TweenMax, { Power3 } from "gsap/src/uncompressed/TweenMax";
 import styled from "styled-components";
 import { WeatherContext } from "../../context/CurrentInfoContext";
 
 const BackInfo = () => {
-  let bgRef = useRef(null);
   const assets = useContext(WeatherContext);
+
+  const [bgCityInfo, setBgCityInfo] = useState(null);
+  let bgRef = useRef(null);
+
+  if (bgCityInfo !== assets.background) setBgCityInfo(assets.background);
 
   useEffect(() => {
     TweenMax.to(bgRef, 1, {
@@ -14,8 +18,9 @@ const BackInfo = () => {
     });
   }, []);
 
-  const backImg = assets.background;
-  return <BACKGROUND ref={el => (bgRef = el)} imgUrl={`/images/${backImg}`} />;
+  return (
+    <BACKGROUND ref={el => (bgRef = el)} imgUrl={`/images/${bgCityInfo}`} />
+  );
 };
 
 const BACKGROUND = styled.div`

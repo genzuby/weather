@@ -6,6 +6,7 @@ export const WeatherContext = React.createContext();
 export const CurrentWeatherStore = props => {
   const getAssetData = () => {
     let getVal = {};
+
     const currentCode = props.currentCode;
 
     if (currentCode === 800 || currentCode === 801) {

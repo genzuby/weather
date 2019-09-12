@@ -92,14 +92,15 @@ class ForeCastDays extends React.Component {
       });
     }
 
-    const day = this.context.tzDay;
-    const iconclass = day
-      ? result.icon
-      : result.iconnight === undefined
-      ? result.icon
-      : result.iconnight;
+    // const day = this.context.tzDay;
+    // const iconclass = day
+    //   ? result.icon
+    //   : result.iconnight === undefined
+    //   ? result.icon
+    //   : result.iconnight;
 
-    return iconclass;
+    // return iconclass;
+    return result.icon;
   };
 
   renderForecast = () => {

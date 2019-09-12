@@ -17,7 +17,7 @@ const WeatherAnimation = () => {
         //thunderstorm + rain + sound
         return (
           <React.Fragment>
-            {/* <SoundEffect /> */}
+            <SoundEffect />
             <Thunderstorms />
             <RainDrops itemCnt="250" angle="20" />
           </React.Fragment>
@@ -27,7 +27,7 @@ const WeatherAnimation = () => {
         //Drizzle + sound
         return (
           <React.Fragment>
-            {/* <SoundEffect /> */}
+            <SoundEffect />
             <RainDrops itemCnt="100" angle="10" />
           </React.Fragment>
         );
@@ -36,7 +36,7 @@ const WeatherAnimation = () => {
         //Rain + sound
         return (
           <React.Fragment>
-            {/* <SoundEffect /> */}
+            <SoundEffect />
             <RainDrops itemCnt="200" angle="20" />
           </React.Fragment>
         );

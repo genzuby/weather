@@ -126,7 +126,7 @@ const INPUTFIELD = styled.input`
 `;
 
 const CITYLIST = styled.ul`
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.8);
   position: absolute;
   top: 1.62em;
   width: 100%;
@@ -137,7 +137,7 @@ const CITYLIST = styled.ul`
   li {
     padding: 0.8em 2em;
     font-size: 0.9rem;
-    border: 1px solid rgba(0, 0, 0, 0.9);
+    border: 1px solid #000;
     color: #969696;
     cursor: pointer;
     transition: all 0.15s ease-out;
@@ -145,7 +145,7 @@ const CITYLIST = styled.ul`
     &:hover,
     &:focus {
       color: #fff;
-      background: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.6);
       outline: none;
     }
   }

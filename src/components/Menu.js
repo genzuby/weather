@@ -10,48 +10,73 @@ const Menu = () => {
   const contextInfo = useContext(CityContext);
 
   let searchRef = useRef(null);
+  let searchBgRef = useRef(null);
   let currentRef = useRef(null);
+  let currentBgRef = useRef(null);
   let inputRef = useRef(null);
 
   const toggleMenu = () => {
     const move1 = displayMenu ? 48 : 57;
     const move2 = displayMenu ? 48 : 97;
+    const delay = displayMenu ? [0.4, 0.3, 0.1, 0] : [0, 0.1, 0.3, 0.4];
 
+    // menu close open
     displayMenu ? setDisplayMenu(false) : setDisplayMenu(true);
+    if (displaySearch) setDisplaySearch(false);
 
-    TweenMax.to(searchRef, 0.3, {
+    TweenMax.to(searchRef, 0.35, {
+      delay: delay[0],
       left: move2,
       top: move1
     });
-    TweenMax.to(currentRef, 0.3, {
-      delay: 0.2,
+    TweenMax.to(searchBgRef, 0.3, {
+      delay: delay[1],
+      left: move2,
+      top: move1
+    });
+    TweenMax.to(currentRef, 0.35, {
+      delay: delay[2],
+      left: move1,
+      top: move2
+    });
+    TweenMax.to(currentBgRef, 0.3, {
+      delay: delay[3],
       left: move1,
       top: move2
     });
   };
 
   const showSearchInput = () => {
-    const inputWidth = displaySearch ? 0 : 360;
+    const inputWidth = displaySearch ? 0 : 320;
 
     displaySearch ? setDisplaySearch(false) : setDisplaySearch(true);
+
     TweenMax.to(inputRef, 0.3, {
       width: inputWidth,
       opacity: 1
     });
     TweenMax.to(searchRef, 0.3, {
-      left: `+=${displaySearch ? -310 : 310}`
+      left: `+=${displaySearch ? -270 : 270}`
+    });
+    TweenMax.to(searchBgRef, 0.3, {
+      left: `+=${displaySearch ? -270 : 270}`
     });
   };
 
   const renderCurrentLocationWeather = () => {
     contextInfo.onCityChange();
     setDisplaySearch(false);
-    TweenMax.to(inputRef, 0.3, {
-      width: 0
-    });
-    TweenMax.to(searchRef, 0.3, {
-      left: "-=310"
-    });
+    if (displaySearch) {
+      TweenMax.to(inputRef, 0.3, {
+        width: 0
+      });
+      TweenMax.to(searchRef, 0.3, {
+        left: "-=270"
+      });
+      TweenMax.to(searchBgRef, 0.3, {
+        left: "-=270"
+      });
+    }
   };
 
   return (
@@ -59,6 +84,10 @@ const Menu = () => {
       <SEARCH ref={el => (inputRef = el)}>
         {displaySearch ? <SearchInput></SearchInput> : ""}
       </SEARCH>
+      <MENUBG
+        ref={el => (searchBgRef = el)}
+        style={{ background: "#7261A3" }}
+      ></MENUBG>
       <MENUBG
         ref={el => (searchRef = el)}
         onClick={showSearchInput}
@@ -75,6 +104,10 @@ const Menu = () => {
           alt="Search"
         />
       </MENUBG>
+      <MENUBG
+        ref={el => (currentBgRef = el)}
+        style={{ background: "#75DDDD" }}
+      ></MENUBG>
       <MENUBG
         ref={el => (currentRef = el)}
         style={{ background: "#75DDDD" }}

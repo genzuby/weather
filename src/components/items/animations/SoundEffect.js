@@ -13,13 +13,13 @@ const SoundEffect = () => {
     refAudio.volume = 0.2;
     refAudio.loop = true;
     refAudio.load();
-
-    refAudio.oncanplaythrough = () => {
-      // refAudio.play();
-      // when the browser estimates it can play through the specified media without having to stop for buffering.
-      console.log("oncanplaythrough");
-    };
     refAudio.play();
+
+    // refAudio.oncanplaythrough = () => {
+    //   refAudio.play();
+    //   // when the browser estimates it can play through the specified media without having to stop for buffering.
+    //   // console.log("oncanplaythrough");
+    // };
   }, [assets.sound]);
 
   const onChangeRadio = checkValue => {
