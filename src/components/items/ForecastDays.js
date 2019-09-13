@@ -114,11 +114,7 @@ class ForeCastDays extends React.Component {
           ref={el => (this.cards[i] = el)}
         >
           <i className={this.getWeatherIcon(data.wid)} />
-          {/* <p className="for__date">
-            {this.getFutureDay(data.dt_txt)
-              ? this.getFutureDay(data.dt_txt)
-              : data.dt_txt}
-          </p> */}
+          <p className="for__date">{this.getFutureDay(data.dt_txt)}</p>
           <div className="detail">
             <p>{data.weather}</p>
             <p className="temp-val">
@@ -142,7 +138,7 @@ const mapStateToProps = state => {
 };
 
 const FORECASTLIST = styled.div`
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -164,8 +160,9 @@ const FORECAST = styled.div`
 
   ${props => (props.day ? "border: 1px solid #fff" : null)};
   color: #fff;
-  background: ${props =>
-    props.day ? "rgba(0, 0, 0, 0.2)" : "rgba(255, 255, 255, 0.2)"};
+  background : transparent;
+  /* background: ${props =>
+    props.day ? "rgba(0, 0, 0, 0.2)" : "rgba(255, 255, 255, 0.2)"}; */
   width: 7.1em;
   height: 12em;
   text-shadow: none;
