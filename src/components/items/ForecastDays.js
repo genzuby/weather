@@ -114,11 +114,11 @@ class ForeCastDays extends React.Component {
           ref={el => (this.cards[i] = el)}
         >
           <i className={this.getWeatherIcon(data.wid)} />
-          <p className="for__date">
+          {/* <p className="for__date">
             {this.getFutureDay(data.dt_txt)
               ? this.getFutureDay(data.dt_txt)
               : data.dt_txt}
-          </p>
+          </p> */}
           <div className="detail">
             <p>{data.weather}</p>
             <p className="temp-val">
