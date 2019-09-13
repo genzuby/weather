@@ -20,10 +20,11 @@ const SoundEffect = () => {
       playPromise
         .then(_ => {
           // Automatic playback started!
-          // console.log("audio played auto");
+          setChecked("PLAY");
         })
         .catch(error => {
           // Auto-play was prevented
+          setChecked("PAUSE");
           console.log("playback prevented");
         });
     }
@@ -31,7 +32,7 @@ const SoundEffect = () => {
 
   const onChangeRadio = checkValue => {
     if (!refAudio) return;
-    
+
     setChecked(checkValue);
     checkValue === "PLAY" ? refAudio.play() : refAudio.pause();
   };

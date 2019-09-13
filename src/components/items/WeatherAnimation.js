@@ -19,7 +19,7 @@ const WeatherAnimation = () => {
           <React.Fragment>
             <SoundEffect />
             <Thunderstorms />
-            <RainDrops itemCnt="200" angle="20" />
+            <RainDrops itemCnt="250" angle="20" />
           </React.Fragment>
         );
       }
@@ -54,7 +54,7 @@ const WeatherAnimation = () => {
         if (asset.day) {
           return (
             <React.Fragment>
-              <SoundEffect />
+              {/* <SoundEffect /> */}
               <Sunshine />
             </React.Fragment>
           );
