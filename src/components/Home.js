@@ -45,12 +45,6 @@ class Home extends React.Component {
       preState.lat !== this.context.lat &&
       preState.lon !== this.context.lon
     ) {
-      console.log(
-        preState.lat,
-        this.context.lat,
-        preState.lon,
-        this.context.lon
-      );
       this.setState({
         lat: this.context.lat,
         lon: this.context.lon,
