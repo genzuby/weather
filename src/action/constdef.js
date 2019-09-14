@@ -1,2 +1,3 @@
 export const FETCH_CURR_WEATHER = "FETCH_CURR_WEATHER";
 export const FETCH_FORE_WEATHER = "FETCH_FORE_WEATHER";
+export const API_KEY = "5151b324e3df81921e77bdddb67c6387";

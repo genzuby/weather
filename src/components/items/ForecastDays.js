@@ -160,9 +160,9 @@ const FORECAST = styled.div`
 
   ${props => (props.day ? "border: 1px solid #fff" : null)};
   color: #fff;
-  background : transparent;
-  /* background: ${props =>
-    props.day ? "rgba(0, 0, 0, 0.2)" : "rgba(255, 255, 255, 0.2)"}; */
+  background: transparent;
+  background: ${props =>
+    props.day ? "rgba(0, 0, 0, 0.2)" : "rgba(255, 255, 255, 0.2)"};
   width: 7.1em;
   height: 12em;
   text-shadow: none;

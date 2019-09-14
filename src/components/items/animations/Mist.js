@@ -9,11 +9,11 @@ const Mist = () => {
 
   useEffect(() => {
     //for moving fog
-    TweenMax.set(refFog1, { left: -30 + "%" });
+    TweenMax.set(refFog1, { left: -10 + "%" });
 
     TweenMax.to(refFog1, 10, {
       opacity: 0.4,
-      left: "+=30%",
+      left: "+=10%",
       repeat: -1,
       yoyo: true
     });
