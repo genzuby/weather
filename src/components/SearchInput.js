@@ -32,6 +32,7 @@ class SearchInput extends React.Component {
         <li
           key={i}
           ref={el => (this.refList[i] = el)}
+          // for keydown
           tabIndex="0"
           onClick={() =>
             this.onClickCity({
@@ -49,7 +50,8 @@ class SearchInput extends React.Component {
                 timezone: city.tz,
                 city: city.name
               },
-              e
+              e,
+              i
             )
           }
         >
@@ -68,7 +70,7 @@ class SearchInput extends React.Component {
     this.setState({ citylist: [] });
   };
 
-  onKeyDownList = (cityInfo, e) => {
+  onKeyDownList = (cityInfo, e, i) => {
     if (e.keyCode === 13) {
       // set context value
       this.context.onCityChange(cityInfo);
@@ -76,6 +78,14 @@ class SearchInput extends React.Component {
       this.refInput.value = cityInfo.city;
       // close list
       this.setState({ citylist: [] });
+    } else if (e.keyCode === 40) {
+      // down arrow get bottom
+      if (this.refList.length === i + 1) return;
+      this.refList[i + 1].focus();
+    } else if (e.keyCode === 38) {
+      // up arrow get top
+      if (i === 0) return;
+      this.refList[i - 1].focus();
     }
   };
 
@@ -86,6 +96,7 @@ class SearchInput extends React.Component {
       this.setState({ citylist: [] });
     } else if (e.keyCode === 40) {
       // keydown down arrow
+      if (!this.refList) return;
       this.refList[0].focus();
     }
   };

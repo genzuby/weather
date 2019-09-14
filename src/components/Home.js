@@ -14,7 +14,7 @@ import WeatherAnimation from "./items/WeatherAnimation";
 import { CurrentWeatherStore } from "../context/CurrentInfoContext";
 // selected city information
 import { CityContext } from "../context/SelectedCityContext";
-// import { checkDayNight } from "./items/commonFunc";
+import { checkDayNight } from "./items/commonFunc";
 
 class Home extends React.Component {
   static contextType = CityContext;
@@ -45,6 +45,12 @@ class Home extends React.Component {
       preState.lat !== this.context.lat &&
       preState.lon !== this.context.lon
     ) {
+      console.log(
+        preState.lat,
+        this.context.lat,
+        preState.lon,
+        this.context.lon
+      );
       this.setState({
         lat: this.context.lat,
         lon: this.context.lon,
@@ -85,8 +91,7 @@ class Home extends React.Component {
       this.setState({
         lat: latitude,
         lon: longitude,
-        // day: checkDayNight() // this.context.tzDay
-        day: this.context.tzDay
+        day: checkDayNight() // this.context.tzDay
       });
     });
   };
