@@ -3,7 +3,7 @@ import openWeatherApi from "../api/openWeatherApi";
 
 export const getCurrentWeather = param => async dispatch => {
   const response = await openWeatherApi.get(
-    `weather?appid=${API_KEY}&${param}`
+    `/weather?appid=${API_KEY}&${param}`
   );
 
   if (response) {
@@ -18,7 +18,7 @@ export const getCurrentWeather = param => async dispatch => {
 
 export const getForecastWeather = param => async dispatch => {
   const response = await openWeatherApi.get(
-    `forecast?appid=${API_KEY}&${param}`
+    `/forecast?appid=${API_KEY}&${param}`
   );
 
   if (response) {
