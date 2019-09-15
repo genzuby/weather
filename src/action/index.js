@@ -6,7 +6,7 @@ export const getCurrentWeather = param => async dispatch => {
     `/weather?appid=${API_KEY}&${param}`
   );
 
-  if (response) {
+  if (response.data) {
     dispatch({
       type: FETCH_CURR_WEATHER,
       payload: response.data
@@ -21,7 +21,7 @@ export const getForecastWeather = param => async dispatch => {
     `/forecast?appid=${API_KEY}&${param}`
   );
 
-  if (response) {
+  if (response.data) {
     const result = maniForeData(response.data.list);
     dispatch({
       type: FETCH_FORE_WEATHER,

@@ -36,7 +36,7 @@ class Home extends React.Component {
   componentDidMount() {
     // fetch data every 5 mins
     this.fetchWetherData();
-    this.intervalID = setInterval(this.fetchWetherData.bind(this), 50000);
+    this.intervalID = setInterval(this.fetchWetherData.bind(this), 100000);
   }
 
   componentDidUpdate(preProps, preState) {
