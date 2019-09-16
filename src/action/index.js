@@ -68,12 +68,9 @@ const maniForeData = data => {
 const makeKey = dt_txt => {
   const date = new Date();
   const gap = date.getTimezoneOffset();
-  const fDate = new Date(dt_txt);
+  // for safari
+  const fDate = new Date(dt_txt.replace(/-/g, "/"));
   fDate.setHours(fDate.getHours() - gap / 60);
-  alert("GAP: " + gap + " DBdate:" + fDate.getHours());
-  // var localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0,-1);
-
-  // console.log(new Date(dt_txt + "Z").getHours());
 
   const localeDay = fDate.getDate();
   const localeHour = fDate.getHours();
