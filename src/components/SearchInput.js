@@ -68,9 +68,11 @@ class SearchInput extends React.Component {
     this.refInput.value = cityInfo.city;
     // close list
     this.setState({ citylist: [] });
+    this.props.handler();
   };
 
   onKeyDownList = (cityInfo, e, i) => {
+    // Ender key down
     if (e.keyCode === 13) {
       // set context value
       this.context.onCityChange(cityInfo);
@@ -78,6 +80,7 @@ class SearchInput extends React.Component {
       this.refInput.value = cityInfo.city;
       // close list
       this.setState({ citylist: [] });
+      this.props.handler();
     } else if (e.keyCode === 40) {
       // down arrow get bottom
       if (this.refList.length === i + 1) return;

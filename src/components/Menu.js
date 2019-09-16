@@ -16,38 +16,37 @@ const Menu = () => {
   let inputRef = useRef(null);
 
   const toggleMenu = e => {
-    // multiple click prevent
-    if (e.detail >= 2) {
-      return;
+    // to reuse funcion and multiple click prevent
+    if (e === undefined || e.detail === 1) {
+      const move1 = displayMenu ? 48 : 57;
+      const move2 = displayMenu ? 48 : 97;
+      const delay = displayMenu ? [0.4, 0.3, 0.1, 0] : [0, 0.1, 0.3, 0.4];
+
+      // menu close open
+      displayMenu ? setDisplayMenu(false) : setDisplayMenu(true);
+      if (displaySearch) setDisplaySearch(false);
+
+      TweenMax.to(searchRef, 0.35, {
+        delay: delay[0],
+        left: move2,
+        top: move1
+      });
+      TweenMax.to(searchBgRef, 0.3, {
+        delay: delay[1],
+        left: move2,
+        top: move1
+      });
+      TweenMax.to(currentRef, 0.35, {
+        delay: delay[2],
+        left: move1,
+        top: move2
+      });
+      TweenMax.to(currentBgRef, 0.3, {
+        delay: delay[3],
+        left: move1,
+        top: move2
+      });
     }
-    const move1 = displayMenu ? 48 : 57;
-    const move2 = displayMenu ? 48 : 97;
-    const delay = displayMenu ? [0.4, 0.3, 0.1, 0] : [0, 0.1, 0.3, 0.4];
-
-    // menu close open
-    displayMenu ? setDisplayMenu(false) : setDisplayMenu(true);
-    if (displaySearch) setDisplaySearch(false);
-
-    TweenMax.to(searchRef, 0.35, {
-      delay: delay[0],
-      left: move2,
-      top: move1
-    });
-    TweenMax.to(searchBgRef, 0.3, {
-      delay: delay[1],
-      left: move2,
-      top: move1
-    });
-    TweenMax.to(currentRef, 0.35, {
-      delay: delay[2],
-      left: move1,
-      top: move2
-    });
-    TweenMax.to(currentBgRef, 0.3, {
-      delay: delay[3],
-      left: move1,
-      top: move2
-    });
   };
 
   const showSearchInput = () => {
@@ -69,7 +68,6 @@ const Menu = () => {
 
   const renderCurrentLocationWeather = () => {
     contextInfo.onCityChange();
-    setDisplaySearch(false);
     if (displaySearch) {
       TweenMax.to(inputRef, 0.3, {
         width: 0
@@ -81,12 +79,24 @@ const Menu = () => {
         left: "-=270"
       });
     }
+    renderCloseAll();
+  };
+
+  const renderCloseAll = () => {
+    // when search data, close menu icons
+    setDisplayMenu(false);
+    setDisplaySearch(false);
+    toggleMenu();
   };
 
   return (
     <MENU>
       <SEARCH ref={el => (inputRef = el)}>
-        {displaySearch ? <SearchInput></SearchInput> : ""}
+        {displaySearch ? (
+          <SearchInput handler={renderCloseAll}></SearchInput>
+        ) : (
+          ""
+        )}
       </SEARCH>
       <MENUBG
         ref={el => (searchBgRef = el)}
