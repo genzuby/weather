@@ -21,7 +21,7 @@ export const getForecastWeather = param => async dispatch => {
     `/forecast?appid=${API_KEY}&${param}`
   );
 
-  if (response.data) {
+  if (response.data.list) {
     const result = maniForeData(response.data.list);
     dispatch({
       type: FETCH_FORE_WEATHER,
@@ -68,8 +68,10 @@ const maniForeData = data => {
 const makeKey = dt_txt => {
   const date = new Date();
   const gap = date.getTimezoneOffset();
-  const fDate = new Date(dt_txt);
+  const fDate = new Date(dt_txt + "Z");
   fDate.setHours(fDate.getHours() - gap / 60);
+
+  // console.log(new Date(dt_txt + "Z").getHours());
 
   const localeDay = fDate.getDate();
   const localeHour = fDate.getHours();
